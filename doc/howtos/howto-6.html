@@ -193,7 +193,7 @@ so setting this cookie to a shorter value isn't the right solution.
 <dt>timeout</dt>
 <dd>
 <strong>[optional]</strong>
-The timeout in seconds for the entire bandwidth test.  The default is set to 15 seconds.  The bandwidth test can run for
+The timeout in milliseconds for the entire bandwidth test.  The default is set to 15 seconds.  The bandwidth test can run for
 a long time, and sometimes, due to network errors, it might never complete.  The timeout forces the test to complete at
 that time.  This is a hard limit.  If the timeout fires, we stop further iterations of the test and attempt to calculate
 bandwidth with the data that we've collected at that point.  Increasing the timeout can get you more data and increase
@@ -208,6 +208,23 @@ The number of times the bandwidth test should run.  The default is set to 5.  Th
 out the best way to proceed with the remaining tests.  Increasing this number will increase the tests accuracy, but at
 the same time increases the risk that the test will timeout.  It should take about 2-4 seconds per run, so consider this
 value along with the <code>timeout</code> value above.
+</dd>
+
+<dt>test_https</dt>
+<dd>
+<strong>[optional]</strong>
+By default, boomerang will skip the bandwidth test over an HTTPS connection. Establishing
+an SSL connection takes time, which could skew the bandwidth results. If all your traffic
+is sent over SSL, then running the test over SSL probably gets you what you want. If you
+set <code>test_https</code> to <code>true</code>, boomerang will run the test instead of skipping.
+</dd>
+
+<dt>block_beacon</dt>
+<dd>
+<strong>[optional]</strong>
+By default, the bandwidth plugin will not block boomerang from sending a beacon, so the results
+will not be included in the broadcast with default settings. If you set <code>block_beacon</code> to
+<code>true</code>, boomerang will wait for the results of the test before sending the beacon.
 </dd>
 
 </dl>
